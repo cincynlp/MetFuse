@@ -1,25 +1,84 @@
-# MetFuse (Metaphor-Metonymy Fusion Corpus)
-Dataset for the ACL 2026 paper: "MetFuse: Figurative Fusion Using Metonymy and Metaphor"
+# MetFuse 🔀
+### Figurative Fusion between Metonymy and Metaphor
 
-**What is MetFuse?**<br>
-MetFuse is the first dataset to combine instances of metaphor and metonymy together, creating hybrid instances. The dataset has been annotated by humans and contains 1,000 quadruplets of literal sentences, and its corresponding metonymic, metaphoric and hybrid variation.<br>
+**Dataset for the paper:**
+> **MetFuse: Figurative Fusion between Metonymy and Metaphor**
+> [https://arxiv.org/abs/2604.12919](https://arxiv.org/abs/2604.12919)
 
-Each instance includes:<br>
-• A literal sentence<br>
-• The target **noun**<br>
-• The target **verb**<br>
-• The **metonymic variation** of the literal sentence.<br>
-• The **metonymic paraphrase** (altered noun) that creates the metonymy.<br>
-• The **metaphoric variation** of the literal sentence (the verb has been altered).<br>
-• The **hybrid variation** (combining the altered noun and the altered verb), combining metaphot and metonymy.<br>
-• The category of metonymy (NE: Named-entity metonymy, or CN: common noun metonymy)<br>
+---
 
-Example:<br>
-Target Word: lawyer<br>
-Verb: see<br>
-MetPar: law office<br>
-Sentence: the **lawyer** in lincoln **saw** issues.<br>
-Metonymy: the **law office** in lincoln saw issues.<br>
-Metaphor: The lawyer in Lincoln **beheld the behemoth** of issues.<br>
-Hybrid: the **law office** in Lincoln **beheld the behemoth** of issues.<br>
-Category: CN (common noun)<br>
+## What is MetFuse?
+
+Metonymy and metaphor are two fundamental forms of figurative language — yet they have almost always been studied in isolation. **MetFuse** is the first dataset to bring them together.
+
+We introduce a framework that takes a **literal sentence** as input and transforms it into three figurative variants:
+
+| Variant | What changes | Example |
+|---|---|---|
+| **Literal** | — | *The audience clapped when the magician entered the stage.* |
+| **Metonymy** | Noun is replaced with a contiguous, in-domain referent | *The **auditorium** clapped when the magician entered the stage.* |
+| **Metaphor** | Verb is mapped to another domain | *The audience **erupted** when the magician entered the stage.* |
+| **Hybrid** | Both noun and verb are altered | *The **auditorium erupted** when the magician entered the stage.* |
+
+The dataset contains **1,000 human-verified quadruplets** — 4,000 sentences in total — spanning both **common noun metonymy** (CN) and **named-entity metonymy** (NE).
+
+---
+
+## Dataset Format
+
+Each instance in MetFuse contains the following fields:
+
+| Field | Description |
+|---|---|
+| `sentence` | The original literal sentence |
+| `target_noun` | The noun that undergoes metonymic substitution |
+| `target_verb` | The verb that undergoes metaphoric mapping |
+| `met_par` | The metonymic paraphrase (the replacement noun) |
+| `metonymy` | The metonymic variant of the sentence |
+| `metaphor` | The metaphoric variant of the sentence |
+| `hybrid` | The hybrid variant (metonymic noun + metaphoric verb) |
+| `category` | Type of metonymy: `CN` (common noun) or `NE` (named entity) |
+
+### Example
+
+```
+target_noun : lawyer
+target_verb : see
+met_par     : law office
+category    : CN
+
+literal     : The lawyer in Lincoln saw issues.
+metonymy    : The law office in Lincoln saw issues.
+metaphor    : The lawyer in Lincoln beheld the behemoth of issues.
+hybrid      : The law office in Lincoln beheld the behemoth of issues.
+```
+
+---
+
+## Download
+
+The MetFuse dataset is available in this repository:
+
+```
+metfuse.csv      ← full dataset (1,000 quadruplets / 4,000 sentences)
+```
+
+---
+
+## Citation
+
+If you use MetFuse in your research, please cite:
+
+```bibtex
+@misc{ghosh2026metfusefigurativefusionmetonymy,
+      title={MetFuse: Figurative Fusion between Metonymy and Metaphor}, 
+      author={Saptarshi Ghosh and Tianyu Jiang},
+      year={2026},
+      eprint={2604.12919},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2604.12919}, 
+}
+```
+
+---
